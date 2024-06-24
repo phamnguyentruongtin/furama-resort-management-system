@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Example</title>
+    <!-- Thêm các file CSS của Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .card {
+            display: inline-block;
+            padding: 12px 24px;
+            color: black;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transition: 1s;
+
+        }
+
+        .carousel-item img {
+            height: 450px; /* kích thước ảnh */
+            object-fit: cover; /* tỷ lệ ảnh */
+        }
+    </style>
+</head>
+<body>
+<!-- Thêm Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Furama</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/home}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/employee}">Employee</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{customer}">Customer</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{service}">Service</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{contract}">Contract</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{logout}">Logout</a>
+            </li>
+<!--            <form class="form-inline ml-auto" action="/" method="get">-->
+<!--                <input style="margin-left: 500px" class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm"-->
+<!--                       aria-label="Tìm kiếm" name="nameservice">-->
+<!--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>-->
+<!--            </form>-->
+        </ul>
+    </div>
+</nav>
+<h2 style="text-align: center;margin: 30px">Furama Resort</h2>
+<!-- Thêm nội dung trang -->
+<div id="carouselExampleControls" class="carousel slide col-md-12" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100"
+                 src="https://danangfantasticity.com/wp-content/uploads/2021/02/Furama-resort-danang-103-105-vo-nguyen-giap-da-nang.jpg"
+                 alt="First slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100"
+                 src="https://danangfantasticity.com/wp-content/uploads/2021/02/Furama-resort-danang-103-105-vo-nguyen-giap-da-nang-fly-cam.jpg"
+                 alt="Second slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100"
+                 src="https://danangfantasticity.com/wp-content/uploads/2021/02/Furama-resort-danang-103-105-vo-nguyen-giap-da-nang.jpg"
+                 alt="Third slide">
+        </div>
+    </div>
+</div>
+<h4 style="margin-top: 30px;margin-bottom: -40px;margin-left: 15px">Danh Sách Các Dịch Vụ</h4>
+<div class="card" style="width: 18rem;margin: 82px" th:each="ser:${listSer}" >
+    <img class="card-img-top " style="width: 230px;height: 150px" th:src="${ser.img}"
+         alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title" th:text="${ser.nameOfFacilityType}"></h5>
+        <a style="background-color: black;color: white" th:href="@{listoffacility?idFacilityType=__${ser.idFacilityType}__}" class="btn btn-primary">Danh Sach dịch vụ</a>
+    </div>
+</div>
+</body>
+<!-- Thêm footer -->
+<footer class="bg-light py-3" style="margin: 30px">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>About Furama Resort</h4>
+                <p>Furama Resort is a luxurious beachfront resort located in Da Nang, Vietnam. We offer world-class
+                    amenities and services for our guests, including restaurants, bars, spa, and more.</p>
+            </div>
+            <div class="col-md-6">
+                <h4>Contact Us</h4>
+                <p>Address: 68 Ho Xuan Huong, Da Nang, Vietnam</p>
+                <p>Phone: +84 236 651 9999</p>
+                <p>Email: info@furama.com</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</footer>

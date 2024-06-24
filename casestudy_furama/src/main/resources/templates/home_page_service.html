@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Example</title>
+  <!-- Thêm các file CSS của Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    .card {
+      display: inline-block;
+      padding: 12px 24px;
+      /*background-color: #c3e6cb;*/
+      color: black;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 8px;
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+<!-- Thêm Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Furama</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" th:href="@{/home}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{employee}">Employee</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{customer}">Customer</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{service}">Service</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{contract}">Contract</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{logout}">Logout</a>
+      </li>
+      <form class="form-inline ml-auto" action="/service" method="get">
+        <input style="margin-left: 500px" class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm Dịch Vụ"
+               aria-label="Tìm kiếm" name="nameservice">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+      </form>
+    </ul>
+  </div>
+</nav>
+<a style="background-color: black;color: white;margin-top: 30px" th:href="@{/create_service}" class="card">Lưu Dịch Vụ</a>
+
+<!-- Thêm nội dung trang -->
+<div class="container my-5">
+  <h1 class="text-center">Danh sách Dịch Vụ</h1>
+  <div class="container my-5">
+    <B th:text="${sms}"></B>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Tên Dịch Vụ</th>
+        <th>Diện Tích</th>
+        <th>Tổng Tiền Trả</th>
+        <th>Số Lượng Người Ở Tối Đa</th>
+        <th>Chất Lượng Phòng</th>
+        <th>Số Tầng</th>
+        <th>Mô Tả Tiện Ích</th>
+        <th>Diện Tích Hồ bơi</th>
+        <th>Dịch Vụ Miễn Phí Đi kèm</th>
+        <th>Kiểu Thuê</th>
+        <th>Loại Nhà</th>
+        <th>Anh chi tiet</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="ser : ${listSer}">
+        <td th:text="${ser.nameOfFacility}"></td>
+        <td th:text="${ser.area}"></td>
+        <td th:text="${ser.cost}"></td>
+        <td th:text="${ser.max_people}"></td>
+        <td th:text="${ser.standardRoom}"></td>
+        <td th:text="${ser.numberOfFloor}"></td>
+        <td th:text="${ser.description_other_convenience}"></td>
+        <td th:text="${ser.poolArea}"></td>
+        <td th:text="${ser.facilityFree}"></td>
+        <td th:text="${ser.rentType.nameOfRentType}"></td>
+        <td th:text="${ser.facilityType.nameOfFacilityType}"></td>
+        <td><img style="width: 70px;height: 60px" th:src="${ser.img}"></td>
+        <td>
+          <a style="background-color: black;color: white"  th:href="@{/delete_service?nameOfFacility=__${ser.nameOfFacility}__}" class="card" onclick="return confirm('Bạn Có Chắc Chắn Muốn Xóa Không?');">Delete</a>
+          <a th:href="@{/edit_service?nameOfFacility=__${ser.nameOfFacility}__}" class="card" style="
+    padding: 12px 34px; background-color: black;color: white" >Edit</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a th:if="${listSer.hasPrevious()}" class="page-link" th:href="@{/service?page=__${listSer.number - 1}__}" >Trước</a>
+        </li>
+        <li class="page-item">
+          <a th:if="${listSer.hasNext()}" class="page-link" th:href="@{/service?page=__${listSer.number + 1}__}" >Sau</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+</div>
+
+<!-- Thêm footer -->
+<footer class>
+</footer>
